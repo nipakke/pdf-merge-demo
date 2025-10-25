@@ -110,7 +110,12 @@ export class PDFService {
   async delete(id: string | string[]) {
     const ids = Array.isArray(id) ? id : [id];
 
+    //TODO: this two is better in a transaction
     await this.db.pdf.where("id").anyOf(ids).delete();
+
+    //delete blob cache entry (all page images)
+    await this.db.blobCache.where("key").startsWithAnyOf(ids).delete()
+
 
     for (const id of ids) {
       this.invalidatePDF(id);
