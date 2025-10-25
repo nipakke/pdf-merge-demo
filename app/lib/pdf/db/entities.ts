@@ -10,14 +10,6 @@ export class PDFEntity extends Entity<LivePDFDB> {
   ts!: number;
 }
 
-export class PDFPageImageCacheEntity extends Entity<LivePDFDB> {
-  pdfId!: string;
-  key!: string;
-  data!: Blob;
-
-  ts!: number;
-}
-
 export class BlobCacheEntity extends Entity<LivePDFDB> {
   key!: string;
   tags!: string[] | undefined;
